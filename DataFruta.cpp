@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
 class Data {
-	static int dia, mes, ano;
+	int dia, mes, ano;
 	public:
 	
 	/*
@@ -18,10 +19,10 @@ class Data {
 			return 0;
 		}
 		else if(d1.ano > d2.ano || d1.mes > d2.mes || d1.dia > d2.dia){
-			return -1;
+			return 1;
 		}
 		else{
-			return 1;	
+			return -1;	
 		}
 	}
 	
@@ -30,6 +31,7 @@ class Data {
 		mes = _mes;
 		ano = _ano;
 	}
+
 	string toString() {
 		string ret = "";
 		ret.append(to_string(dia));
@@ -59,44 +61,36 @@ class ListaNomes : public Lista{
 	elementos v�o existir na lista e depois
 	solicita a digita��o de cada um deles
 	*/	
-	void entradaDeDados() {
+	void entradaDeDados() override{
 		int quant;string nome;
-		cout<<"Quantos elementos tera na lista?"<<endl;cin>>quant;
+		cout<<"Quantos elementos tera na lista de nomes? : ";cin>>quant;
 		for(int i=0;i<quant;i++){
-			cout<<"Digite o nome: "<<endl;cin>>nome;
+			cout<<"Digite o "<<i+1<<" nome: ";cin>>nome;
 			lista.push_back(nome);
 		}
+		sort(lista.begin(), lista.end());
 	}
 		
 	void mostraMediana() {
 		cout << "Aqui vai mostrar a mediana da lista de strings" << endl;
+		
 		if(lista.size()%2 == 0){
-			cout<<"Mediana: "<<lista[lista.size()/2]<<endl;
+			cout<<"Mediana: "<<lista[(lista.size()/2)-1]<<endl;
 		}
 		else{
-			cout<<"Mediana: "<<lista[(lista.size()/2)+1]<<endl;
+			cout<<"Mediana: "<<lista[(lista.size()/2)]<<endl;
 		}
 	}
 	
 	void mostraMenor() {
 		string menor;
 		cout << "Aqui vai mostrar o primeiro nome alfabeticamente" << endl;
-		for(int i = 0;i<lista.size();i++){
-			if(lista[i] < lista[i+1]){
-				menor = lista[i];
-			}
-		}
-		cout<<menor<<endl;
+		cout<<"Menor: "<<lista[0]<<endl;
 	}
 	void mostraMaior() {
 		string maior;
 		cout << "aqui vai mostrar o ultimo nome alfabeticamente" << endl;
-		for(int i = 0;i<lista.size();i++){
-			if(lista[i] > lista[i+1]){
-				maior = lista[i];
-			}
-		}
-		cout<<maior<<endl;
+		cout<<"Maior: "<<lista[lista.size()-1]<<endl;
 	}
 };
 
@@ -111,12 +105,14 @@ class ListaDatas :public Lista {
 	solicita a digita��o de cada um deles
 	*/	
 	void entradaDeDados() {
-		int quant;Data data;
-		cout<<"Quantos elementos tera na lista?"<<endl;cin>>quant;
+		int quant;
+		int dia,mes,ano;
+		cout<<"Quantos elementos tera na lista de datas? : ";cin>>quant;
 		for(int i=0;i<quant;i++){
-			cout<<"Digite o dia: "<<endl;cin>>data.dia;
-			cout<<"Digite o mes: "<<endl;cin>>data.mes;
-			cout<<"Digite o ano: "<<endl;cin>>data.ano;
+			cout<<"Digite o dia da "<<i+1<<" data: ";cin>>dia;
+			cout<<"Digite o mes da "<<i+1<<" data: ";cin>>mes;
+			cout<<"Digite o ano da "<<i+1<<" data: ";cin>>ano;
+			Data data(dia,mes,ano);
 			lista.push_back(data);
 		}
 	}
@@ -124,10 +120,10 @@ class ListaDatas :public Lista {
 	void mostraMediana() {
 		cout << "Aqui vai mostrar a mediana da lista de datas" << endl;
 		if(lista.size()%2 == 0){
-			cout<<"Mediana: "<<lista[lista.size()/2].toString()<<endl;
+			cout<<"Mediana: "<<lista[(lista.size()/2)-1].toString()<<endl;
 		}
 		else{
-			cout<<"Mediana: "<<lista[(lista.size()/2)+1].toString()<<endl;
+			cout<<"Mediana: "<<lista[(lista.size()/2)].toString()<<endl;
 		}
 	}
 	
