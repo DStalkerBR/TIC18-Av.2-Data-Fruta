@@ -5,14 +5,22 @@
 
 using namespace std;
 
+class Lista {
+	public:
+	virtual void entradaDeDados() =0;
+	virtual void mostraMediana() =0;
+	virtual void mostraMenor() =0;
+	virtual void mostraMaior() =0;
+};
+
 class Data {
 	int dia, mes, ano;
 	public:
 	
 	/*
-	O m�todo abaixo retornar� -1 se d1 � anterior a d2
-	Retornar� 0 se d1 = d2
-	Retornar� +1 se d1 � posterior a d2
+	O método abaixo retornará -1 se d1 é anterior a d2
+	Retornará 0 se d1 = d2
+	Retornará +1 se d1 é posterior a d2
 	*/	
 	static int compara(Data d1, Data d2) { 
 		if(d1.ano == d2.ano && d1.mes == d2.mes && d1.dia == d2.dia){
@@ -43,23 +51,15 @@ class Data {
 	}
 };
 
-class Lista {
-	public:
-	virtual void entradaDeDados() =0;
-	virtual void mostraMediana() =0;
-	virtual void mostraMenor() =0;
-	virtual void mostraMaior() =0;
-};
-
 class ListaNomes : public Lista{
 	vector<string> lista;
 	
 	public:
 	
 	/*
-	O m�todo abaixo pergunta ao usu�rios quantos
-	elementos v�o existir na lista e depois
-	solicita a digita��o de cada um deles
+	O método abaixo pergunta ao usuários quantos
+	elementos vão existir na lista e depois
+	solicita a digitação de cada um deles
 	*/	
 	void entradaDeDados() override{
 		int quant;string nome;
@@ -100,9 +100,9 @@ class ListaDatas :public Lista {
 	public:
 		
 	/*
-	O m�todo abaixo pergunta ao usu�rios quantos
-	elementos v�o existir na lista e depois
-	solicita a digita��o de cada um deles
+	O método abaixo pergunta ao usuários quantos
+	elementos vão existir na lista e depois
+	solicita a digitação de cada um deles
 	*/	
 	void entradaDeDados() {
 		int quant;
@@ -151,10 +151,10 @@ class ListaSalarios :public Lista {
 	public:
 	
 	/*
-	O m�todo abaixo pergunta ao usu�rios quantos
-	elementos v�o existir na lista e depois
-	solicita a digita��o de cada um deles
-	*/	
+	O método abaixo pergunta ao usuarios quantos
+	elementos vão existir na lista e depois
+	solicita a digitação de cada um deles
+	*/
 	void entradaDeDados() {
 		int quant;float salario;
 		cout<<"Quantos elementos tera na lista?"<<endl;cin>>quant;
@@ -199,9 +199,9 @@ class ListaIdades : public Lista {
 	public:
 		
 		/*
-	O m�todo abaixo pergunta ao usu�rios quantos
-	elementos v�o existir na lista e depois
-	solicita a digita��o de cada um deles
+	O método abaixo pergunta ao usuários quantos
+	elementos vão existir na lista e depois
+	solicita a digitação de cada um deles
 	*/	
 	void entradaDeDados() {
 		int qunt,idade;
@@ -268,4 +268,3 @@ int main () {
 	
 }
     
-
