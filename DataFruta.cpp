@@ -4,14 +4,23 @@
 
 using namespace std;
 
+class Lista {
+	public:
+	virtual void entradaDeDados() =0;
+	virtual void mostraMediana() =0;
+	virtual void mostraMenor() =0;
+	virtual void mostraMaior() =0;
+};
+
+
 class Data {
 	int dia, mes, ano;
 	public:
 	
 	/*
-	O mÈtodo abaixo retornar· -1 se d1 È anterior a d2
-	Retornar· 0 se d1 = d2
-	Retornar· +1 se d1 È posterior a d2
+	O m√©todo abaixo retornar√° -1 se d1 √© anterior a d2
+	Retornar√° 0 se d1 = d2
+	Retornar√° +1 se d1 √© posterior a d2
 	*/	
 	static int compara(Data d1, Data d2) { 
 		return 0;
@@ -22,6 +31,7 @@ class Data {
 		mes = _mes;
 		ano = _ano;
 	}
+
 	string toString() {
 		string ret = "";
 		ret.append(to_string(dia));
@@ -31,117 +41,110 @@ class Data {
 		ret.append(to_string(ano));
 		return ret;
 	}
+
 };
 
-class Lista {
-	public:
-	virtual void entradaDeDados() =0;
-	virtual void mostraMediana() =0;
-	virtual void mostraMenor() =0;
-	virtual void mostraMaior() =0;
-};
-
-class ListaNomes {
+class ListaNomes : public Lista{
 	vector<string> lista;
 	
 	public:
 	
 	/*
-	O mÈtodo abaixo pergunta ao usu·rios quantos
-	elementos v„o existir na lista e depois
-	solicita a digitaÁ„o de cada um deles
+	O m√©todo abaixo pergunta ao usu√°rios quantos
+	elementos v√£o existir na lista e depois
+	solicita a digita√ß√£o de cada um deles
 	*/	
-	void entradaDeDados() {
+	void entradaDeDados() override {
 		lista.push_back("Teste");
 	}
 		
-	void mostraMediana() {
+	void mostraMediana() override{
 		cout << "Aqui vai mostrar a mediana da lista de strings" << endl;
 	}
 	
-	void mostraMenor() {
+	void mostraMenor() override{
 		cout << "Aqui vai mostrar o primeiro nome alfabeticamente" << endl;
 	}
-	void mostraMaior() {
+	void mostraMaior() override{
 		cout << "aqui vai mostrar o ultimo nome alfabeticamente" << endl;
 	}
 };
 
-class ListaDatas  {
+class ListaDatas : public Lista {
 	vector<Data> lista;
 	
 	public:
 		
 	/*
-	O mÈtodo abaixo pergunta ao usu·rios quantos
-	elementos v„o existir na lista e depois
-	solicita a digitaÁ„o de cada um deles
+	O m√©todo abaixo pergunta ao usu√°rios quantos
+	elementos v√£o existir na lista e depois
+	solicita a digita√ß√£o de cada um deles
 	*/	
-	void entradaDeDados() {
+	void entradaDeDados() override{
 		
 	}
 	
-	void mostraMediana() {
+	void mostraMediana() override{
 		cout << "Aqui vai mostrar a mediana da lista de datas" << endl;
 	}
 	
-	void mostraMenor() {
+	void mostraMenor() override{
 		cout << "Aqui vai mostrar a primeira data cronologicamente" << endl;
 	}
-	void mostraMaior() {
+	void mostraMaior() override{
 		cout << "aqui vai mostrar a ultima data cronologicamente" << endl;
 	}
 };
 
-class ListaSalarios  {
+class ListaSalarios : public Lista {
 	vector<float> lista;
 	
 	public:
 	
 	/*
-	O mÈtodo abaixo pergunta ao usu·rios quantos
-	elementos v„o existir na lista e depois
-	solicita a digitaÁ„o de cada um deles
+	O m√©todo abaixo pergunta ao usuarios quantos
+	elementos v√£o existir na lista e depois
+	solicita a digita√ß√£o de cada um deles
 	*/	
-	void entradaDeDados() {
+	void entradaDeDados() override{
 		
 	}
 			
-	void mostraMediana() {
+	void mostraMediana() override{
 		cout << "Aqui vai mostrar a mediana da lista de salarios" << endl;
 	}
 	
-	void mostraMenor() {
+	void mostraMenor() override{
 		cout << "Aqui vai mostrar o menor dos salarios" << endl;
 	}
-	void mostraMaior() {
+	void mostraMaior() override{
 		cout << "aqui vai mostrar o maior dos salarios" << endl;
 	}
 };
 
 
-class ListaIdades  {
+class ListaIdades  : public Lista {
 	vector<int> lista;
 	
 	public:
 		
 		/*
-	O mÈtodo abaixo pergunta ao usu·rios quantos
-	elementos v„o existir na lista e depois
-	solicita a digitaÁ„o de cada um deles
+	O m√©todo abaixo pergunta ao usu√°rios quantos
+	elementos v√£o existir na lista e depois
+	solicita a digita√ß√£o de cada um deles
 	*/	
-	void entradaDeDados() {
+	void entradaDeDados() override{
 		
 	}
 	
-	void mostraMediana() {
+	void mostraMediana() override{
 		cout << "Aqui vai mostrar a mediana da lista de idades" << endl;
 	}
 	
-	void mostraMenor() {
+	void mostraMenor() override{
 		cout << "Aqui vai mostrar a menor das idades" << endl;
 	}
-	void mostraMaior() {
+	void mostraMaior() override{
 		cout << "aqui vai mostrar a maior das idades" << endl;
 	}
 };
