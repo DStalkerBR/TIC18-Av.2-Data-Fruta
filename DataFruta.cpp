@@ -98,17 +98,6 @@ class ListaDatas :public Lista {
 	vector<Data> lista_datas;
 	
 	public:
-	ListaDatas(){
-		// Gerando uma lista de datas aleatorias para teste
-		for (size_t i = 0; i < 6; i++) {
-			int ano = 2020 + rand() % 4; // Ano entre 2020 e 2023
-			int mes = 1 + rand() % 12;    // Mês entre 1 e 12
-			int dia = 1 + rand() % 31;    // Dia entre 1 e 31 (não leva em conta meses específicos)
-        	this->lista_datas.push_back(Data(dia, mes, ano));
-			cout << "Data [" << i << "]: " << lista_datas.at(i).toString() << " incluida na lista de datas." << endl; 
-    	}
-	}
-		
 	/*
 	O método abaixo pergunta ao usuários quantos
 	elementos vão existir na lista e depois
@@ -123,7 +112,7 @@ class ListaDatas :public Lista {
 			cout<<"Digite o mes da "<<i+1<<" data: ";cin>>mes;
 			cout<<"Digite o ano da "<<i+1<<" data: ";cin>>ano;
 			Data data(dia,mes,ano);
-			lista_datas.push_back(data);
+			this->lista_datas.push_back(data);
 			cout << "Data [" << i << "]: " << data.toString() << " incluida na lista de datas." << endl; 
 		}
 	}
@@ -139,9 +128,9 @@ class ListaDatas :public Lista {
 					// Iniciando um loop para percorrer as datas não ordenadas.
 					
 					Data dataChave = datasOrdenadas[i]; // Copiando a data atual que será inserida na lista ordenada.
-					size_t j = i - 1;
+					int j = i - 1;
 
-					// Loop para comparar 'dataAtual' com as datas anteriores na lista ordenada.
+					// Loop para comparar 'dataChave' com as datas anteriores na lista ordenada.
 					// E mover datas maiores que a data Chave a direita
 					while (j >= 0 && (Data::compara(datasOrdenadas[j], dataChave) == 1)) {
 						datasOrdenadas[j + 1] = datasOrdenadas[j];
@@ -153,17 +142,20 @@ class ListaDatas :public Lista {
 				}
 
 				// Calcula o índice da mediana
-				size_t tamanho = datasOrdenadas.size();
-				size_t indiceMediana = tamanho / 2;
+				size_t tamanhoLista = datasOrdenadas.size();
+				size_t indiceMediana = tamanhoLista / 2;
 
 				// Obtém a data mediana (a primeira data se o tamanho for par)
-				Data mediana = datasOrdenadas[indiceMediana];
-
-				// Imprime a data mediana
-				cout << "A mediana da lista de datas: " << mediana.toString() << endl;
+				cout << "A mediana da lista de datas: ";
+				if(tamanhoLista%2 == 0){
+					cout << datasOrdenadas[indiceMediana - 1].toString() << endl;
+				}
+				else{
+					cout << datasOrdenadas[indiceMediana].toString() << endl;
+				}
 			}
 		else {
-			cout << "A lista de datas está vazia." << std::endl;
+			cout << "A lista de datas está vazia." << endl;
 		}
 	}
 	
@@ -183,7 +175,7 @@ class ListaDatas :public Lista {
 			cout << "A primeira data cronologicamente e: "<<primeiraData.toString() << endl;
 		}
 		else {
-			cout << "A lista de datas está vazia." << std::endl;
+			cout << "A lista de datas está vazia." << endl;
 		}
 	}
 
@@ -308,10 +300,8 @@ class ListaIdades : public Lista {
  
 int main () {
 	vector<Lista*> listaDeListas;
-	ListaDatas listaDatas;
-	listaDeListas.push_back(&listaDatas);
 
-	/*ListaNomes listaNomes;
+	ListaNomes listaNomes;
 	listaNomes.entradaDeDados();
 	listaDeListas.push_back(&listaNomes);
 	
@@ -326,7 +316,7 @@ int main () {
 	ListaIdades listaIdades;
 	listaIdades.entradaDeDados();
 	listaDeListas.push_back(&listaIdades);
-	*/
+	
 	for (Lista* l : listaDeListas) {
 		l->mostraMediana();
 		l->mostraMenor();
