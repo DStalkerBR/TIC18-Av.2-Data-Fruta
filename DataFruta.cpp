@@ -11,7 +11,8 @@ class Lista {
 	virtual void mostraMediana() =0;
 	virtual void mostraMenor() =0;
 	virtual void mostraMaior() =0;
-
+	virtual void listarEmOrdem () =0;
+	virtual void primeirosElementos(int n) =0;
 };
 
 class Data {
@@ -23,18 +24,27 @@ class Data {
 	Retornará 0 se d1 = d2
 	Retornará +1 se d1 é posterior a d2
 	*/	
-	static int compara(Data d1, Data d2) { 
-		if(d1.ano == d2.ano && d1.mes == d2.mes && d1.dia == d2.dia){
-			return 0;
-		}
-		else if(d1.ano > d2.ano || d1.mes > d2.mes || d1.dia > d2.dia){
-			return 1;
-		}
-		else{
-			return -1;	
+	static int compara(Data d1, Data d2) {
+    	if (d1.ano < d2.ano)
+        	return -1;
+    	else if (d1.ano > d2.ano)
+        	return 1;
+		else if (d1.ano == d2.ano){
+			if (d1.mes < d2.mes)
+				return -1;
+			else if (d1.mes > d2.mes)
+				return 1;
+			else if (d1.mes == d2.mes){
+				if (d1.dia < d2.dia)
+					return -1;
+				else if (d1.dia > d2.dia)
+					return 1;
+				else
+					return 0;
+			}
 		}
 	}
-	
+
 	Data (int _dia, int _mes, int _ano) {
 		dia = _dia;
 		mes = _mes;
@@ -93,6 +103,26 @@ class ListaNomes : public Lista{
 		cout << "aqui vai mostrar o ultimo nome alfabeticamente" << endl;
 		cout<<"Maior: "<<lista[lista.size()-1]<<endl;
 	}
+
+	void listarEmOrdem(){
+		cout<<"Listando em nomes em ordem: "<<endl;
+		for(auto l:lista){
+			cout<<l<<endl;
+		}
+	}
+
+	void primeirosElementos(int n){
+		if(lista.size() < n && lista.size() > 0 && n > 0){	
+			cout<<"Listando os "<<n<<" primeiros elementos: "<<endl;
+			for(int i=0;i<n;i++){
+				cout<<lista[i]<<endl;
+			}
+		}
+		else{
+			cout<<"Lista de nomes vazia"<<endl;
+		}
+	}
+
 };
 
 class ListaDatas :public Lista {
@@ -357,6 +387,10 @@ public:
  
 int main () {
 	vector<Lista*> listaDeListas;
+	int n;
+
+	cout << "Entre com um numero inteiro: " << endl;
+	cin >> n;
 
 	ListaNomes listaNomes;
 	listaNomes.entradaDeDados();
@@ -378,6 +412,8 @@ int main () {
 		l->mostraMediana();
 		l->mostraMenor();
 		l->mostraMaior();
+		l->listarEmOrdem();
+		l->primeirosElementos(n);
 	}
 	
 	
