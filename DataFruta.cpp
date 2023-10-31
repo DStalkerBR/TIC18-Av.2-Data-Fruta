@@ -151,25 +151,7 @@ class ListaDatas :public Lista {
 		if (!this->lista_datas.empty()) {
 				// Copiando a lista de datas para uma nova lista temporária onde as datas
 				// aerao ordenadas cronologicamente
-				vector<Data> datasOrdenadas = this->lista_datas;
-
-
-				for (size_t i = 1; i < datasOrdenadas.size(); i++) {
-					// Iniciando um loop para percorrer as datas não ordenadas.
-					
-					Data dataChave = datasOrdenadas[i]; // Copiando a data atual que será inserida na lista ordenada.
-					int j = i - 1;
-
-					// Loop para comparar 'dataChave' com as datas anteriores na lista ordenada.
-					// E mover datas maiores que a data Chave a direita
-					while (j >= 0 && (Data::compara(datasOrdenadas[j], dataChave) == 1)) {
-						datasOrdenadas[j + 1] = datasOrdenadas[j];
-						j--;
-					}
-					
-					// Movendo a data Chave pra posição a anterior as datas que foram movidas a direita
-					datasOrdenadas[j + 1] = dataChave;
-				}
+				vector<Data> datasOrdenadas = this->ordenar();
 
 				// Calcula o índice da mediana
 				size_t tamanhoLista = datasOrdenadas.size();
