@@ -389,8 +389,7 @@ int main () {
 	vector<Lista*> listaDeListas;
 	int n;
 
-	cout << "Entre com um numero inteiro: " << endl;
-	cin >> n;
+	
 
 	ListaNomes listaNomes;
 	listaNomes.entradaDeDados();
@@ -407,6 +406,9 @@ int main () {
 	ListaIdades listaIdades;
 	listaIdades.entradaDeDados();
 	listaDeListas.push_back(&listaIdades);
+
+	cout << "Entre com um numero inteiro que mostrará os N elementos de cada lista : " << endl;
+	cin >> n;
 	
 	for (Lista* l : listaDeListas) {
 		l->mostraMediana();
