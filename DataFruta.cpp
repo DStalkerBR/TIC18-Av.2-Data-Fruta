@@ -92,6 +92,26 @@ class ListaNomes : public Lista{
 		cout << "aqui vai mostrar o ultimo nome alfabeticamente" << endl;
 		cout<<"Maior: "<<lista[lista.size()-1]<<endl;
 	}
+
+	void listarEmOrdem(){
+		cout<<"Listando em nomes em ordem: "<<endl;
+		for(auto l:lista){
+			cout<<l<<endl;
+		}
+	}
+
+	void primeirosElementos(int n){
+		if(lista.size() < n && lista.size() > 0 && n > 0){	
+			cout<<"Listando os "<<n<<" primeiros elementos: "<<endl;
+			for(int i=0;i<n;i++){
+				cout<<lista[i]<<endl;
+			}
+		}
+		else{
+			cout<<"Lista de nomes vazia"<<endl;
+		}
+	}
+
 };
 
 class ListaDatas :public Lista {
