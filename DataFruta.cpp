@@ -242,51 +242,37 @@ public:
 
 
 class ListaIdades : public Lista {
-	vector<int> lista;
-	
-	public:
-		
-		/*
-	O método abaixo pergunta ao usuários quantos
-	elementos vão existir na lista e depois
-	solicita a digitação de cada um deles
-	*/	
-	void entradaDeDados() {
-		int qunt,idade;
-		cout<<"Quantos elementos tera na lista?"<<endl;cin>>qunt;
-		for(int i=0;i<qunt;i++){
-			cout<<"Digite a idade: "<<endl;cin>>idade;
-			lista.push_back(idade);
-		}
-	}
-	
-	void mostraMediana() {
-		cout << "Aqui vai mostrar a mediana da lista de idades" << endl;
-		if(lista.size()%2 == 0){
-			cout<<"Mediana: "<<lista[lista.size()/2]<<endl;
-		}
-		else{
-			cout<<"Mediana: "<<lista[(lista.size()/2)+1]<<endl;
-		}
-	}
-	
-	void mostraMenor() {
-		cout << "Aqui vai mostrar a menor das idades" << endl;
-		for(auto l:lista){
-			if(l < lista[0]){
-				cout<<"Menor: "<<l<<endl;
-			}
-		}
+    vector<int> lista;
 
-	}
-	void mostraMaior() {
-		cout << "aqui vai mostrar a maior das idades" << endl;
-		for(auto l:lista){
-			if(l > lista[0]){
-				cout<<"Maior: "<<l<<endl;
-			}
-		}
-	}
+public:
+    void entradaDeDados() override {
+        int quant, idade;
+        cout << "Quantos elementos terá na lista de idades? : ";
+        cin >> quant;
+        for (int i = 0; i < quant; i++) {
+            cout << "Digite a idade: ";
+            cin >> idade;
+            lista.push_back(idade);
+        }
+        sort(lista.begin(), lista.end());
+    }
+//Mostrar a mediana, conforme definido no problema, para um número par
+    void mostraMediana() override {
+        if(lista.size()%2 == 1){
+            cout << "Mediana da lista de idades: " << lista[lista.size() / 2] << endl;
+        }
+        else{
+            cout << "Mediana da lista de idades: " << ((double)lista[lista.size() / 2]+(double)lista[(lista.size() / 2)-1])/2 << endl;
+        }
+    }
+
+    void mostraMenor() override {
+        cout << "Menor idade: " << lista[0] << endl;
+    }
+
+    void mostraMaior() override {
+        cout << "Maior idade: " << lista[lista.size() - 1] << endl;
+    }
 };
  
 int main () {
