@@ -11,6 +11,7 @@ class Lista {
 	virtual void mostraMediana() =0;
 	virtual void mostraMenor() =0;
 	virtual void mostraMaior() =0;
+
 };
 
 class Data {
@@ -181,6 +182,27 @@ public:
     void mostraMaior() override {
         cout << "Maior salário: " << lista[lista.size() - 1] << endl;
     }
+	//Implementação do método listaEmOrdem
+    void listarEmOrdem() override {
+        cout<<" Listando salários em ordem"<<endl;
+        for(auto l:lista){
+            cout <<1<< endl;
+        }
+    }
+//Implementação do método primeirosElementos
+    void primeirosElementos(int n) {
+     if(lista.size() < n && lista.size() > 0 && n > 0){
+        int i = 0;
+	cout<<" Listando os "<<n<<"primeiros elemenstos"<<endl;
+        for(int i=0; i<n; i++){
+        cout<<lista[i]<<endl;
+        }	
+    }   
+else {
+cout <<"Lista vazia"<< endl; 
+}
+}  
+
 };
 
 
