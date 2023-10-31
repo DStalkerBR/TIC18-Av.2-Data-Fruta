@@ -95,10 +95,39 @@ class ListaNomes : public Lista{
 };
 
 class ListaDatas :public Lista {
-	vector<Data> lista;
+	vector<Data> lista_datas;
+
+	/**
+	 * Ordena a lista de datas utilizando o algoritmo de ordenação por inserção.
+	 *
+	 * Este método cria uma cópia da lista de datas original e a ordena em ordem crescente
+	 * com base em critérios definidos na classe Data. As datas ordenadas são retornadas em
+	 * um novo vetor, enquanto a lista original permanece inalterada.
+	 *
+	 * @return Um vetor de datas ordenadas em ordem crescente.
+	 */
+	vector<Data> ordenar(){
+		vector<Data> datasOrdenadas = this->lista_datas;
+		for (size_t i = 1; i < datasOrdenadas.size(); i++) {
+			// Iniciando um loop para percorrer as datas não ordenadas.
+			
+			Data dataChave = datasOrdenadas[i]; // Copiando a data atual que será inserida na lista ordenada.
+			int j = i - 1;
+
+			// Loop para comparar 'dataAtual' com as datas anteriores na lista ordenada.
+			// E mover datas maiores que a data Chave a direita
+			while (j >= 0 && (Data::compara(datasOrdenadas[j], dataChave) == 1)) {
+				datasOrdenadas[j + 1] = datasOrdenadas[j];
+				j--;
+			}
+			
+			// Movendo a data Chave pra posição a anterior as datas que foram movidas a direita
+			datasOrdenadas[j + 1] = dataChave;
+		}
+		return datasOrdenadas;
+	}
 	
 	public:
-		
 	/*
 	O método abaixo pergunta ao usuários quantos
 	elementos vão existir na lista e depois
@@ -113,35 +142,107 @@ class ListaDatas :public Lista {
 			cout<<"Digite o mes da "<<i+1<<" data: ";cin>>mes;
 			cout<<"Digite o ano da "<<i+1<<" data: ";cin>>ano;
 			Data data(dia,mes,ano);
-			lista.push_back(data);
+			this->lista_datas.push_back(data);
+			cout << "Data [" << i << "]: " << data.toString() << " incluida na lista de datas." << endl; 
 		}
 	}
 	
 	void mostraMediana() {
-		cout << "Aqui vai mostrar a mediana da lista de datas" << endl;
-		if(lista.size()%2 == 0){
-			cout<<"Mediana: "<<lista[(lista.size()/2)-1].toString()<<endl;
-		}
-		else{
-			cout<<"Mediana: "<<lista[(lista.size()/2)].toString()<<endl;
+		if (!this->lista_datas.empty()) {
+				// Copiando a lista de datas para uma nova lista temporária onde as datas
+				// aerao ordenadas cronologicamente
+				vector<Data> datasOrdenadas = this->ordenar();
+
+				// Calcula o índice da mediana
+				size_t tamanhoLista = datasOrdenadas.size();
+				size_t indiceMediana = tamanhoLista / 2;
+
+				// Obtém a data mediana (a primeira data se o tamanho for par)
+				cout << "A mediana da lista de datas: ";
+				if(tamanhoLista%2 == 0){
+					cout << datasOrdenadas[indiceMediana - 1].toString() << endl;
+				}
+				else{
+					cout << datasOrdenadas[indiceMediana].toString() << endl;
+				}
+			}
+		else {
+			cout << "A lista de datas está vazia." << endl;
 		}
 	}
 	
 	void mostraMenor() {
-		cout << "Aqui vai mostrar a primeira data cronologicamente" << endl;
-		for(auto l:lista){
-			if(Data::compara(l,lista[0]) == -1){
-				cout<<"Menor: "<<l.toString()<<endl;
+		if (!this->lista_datas.empty()) {
+			// Inicializa a primeiraData com o primeiro elemento da lista
+			Data primeiraData = this->lista_datas.front();
+
+			// Itera por todas as datas na lista
+			for(auto data_atual:this->lista_datas){
+				// Compara a data atual com a primeira data na iteração atual
+				if(Data::compara(data_atual, primeiraData) == -1){
+					// Se a data atual for anterior à primeiraData, atualiza primeiraData
+					primeiraData = data_atual;
+				}
 			}
+			cout << "A primeira data cronologicamente e: "<<primeiraData.toString() << endl;
+		}
+		else {
+			cout << "A lista de datas está vazia." << endl;
 		}
 	}
+
 	void mostraMaior() {
-		cout << "aqui vai mostrar a ultima data cronologicamente" << endl;
-		for(auto l:lista){
-			if(Data::compara(l,lista[0]) == 1){
-				cout<<"Maior: "<<l.toString()<<endl;
+		if (!this->lista_datas.empty()) {
+			// Inicializa a ultima_data com o primeiro elemento da lista
+			Data ultimaData = this->lista_datas.front();
+
+			// Itera por todas as datas na lista
+			for(auto data_atual:this->lista_datas){
+				// Compara a data atual com a primeira data na iteração atual
+				if(Data::compara(data_atual, ultimaData) == 1){
+
+					// Se a data atual for posterior à ultimaData, atualiza ultimaData
+					ultimaData = data_atual;
+					
+				}
 			}
+			cout << "A Ultima data cronologicamente e: "<< ultimaData.toString() << endl;
 		}
+		else {
+			cout << "A lista de datas esta vazia." << std::endl;
+		}
+	}
+
+	void listarEmOrdem() override {
+		if (!this->lista_datas.empty()) {
+			cout << "______________________________________________"<< endl;
+            cout << "Lista de Datas em ordem crescente" << endl;
+			cout << "______________________________________________"<< endl;
+            for(auto data_atual:this->ordenar()){
+                cout << data_atual.toString() << endl;
+            }
+        }
+        else {
+            cout << "A lista de datas está vazia." << endl;
+        }
+	}
+
+	void primeirosElementos(int n) override{
+		if (!this->lista_datas.empty()) {
+			if (n > 0 && n <= this->lista_datas.size()) {
+				auto datasOrdenadas = this->ordenar();
+				cout << "______________________________________________"<< endl;
+				cout << n << " primeiros elementos da lista de datas: " << endl;
+				cout << "______________________________________________"<< endl;
+				for(size_t i = 0; i < n; i++){
+					cout << datasOrdenadas.at(i).toString() << endl;
+				}
+			} else {
+				cout << "Numero menor ou igual a 0 ou maior que o tamanho da lista. " << endl;
+			}
+        }else {
+            cout << "A lista de datas está vazia." << endl;
+        }
 	}
 };
 
@@ -243,7 +344,7 @@ public:
  
 int main () {
 	vector<Lista*> listaDeListas;
-	
+
 	ListaNomes listaNomes;
 	listaNomes.entradaDeDados();
 	listaDeListas.push_back(&listaNomes);
@@ -265,6 +366,7 @@ int main () {
 		l->mostraMenor();
 		l->mostraMaior();
 	}
+	
 	
 }
     
