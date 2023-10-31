@@ -11,6 +11,8 @@ class Lista {
 	virtual void mostraMediana() =0;
 	virtual void mostraMenor() =0;
 	virtual void mostraMaior() =0;
+	virtual void listarEmOrdem () =0;
+	virtual void primeirosElementos(int n) =0;
 };
 
 class Data {
@@ -286,6 +288,10 @@ public:
  
 int main () {
 	vector<Lista*> listaDeListas;
+	int n;
+
+	cout << "Entre com um numero inteiro: " << endl;
+	cin >> n;
 
 	ListaNomes listaNomes;
 	listaNomes.entradaDeDados();
@@ -307,6 +313,8 @@ int main () {
 		l->mostraMediana();
 		l->mostraMenor();
 		l->mostraMaior();
+		l->listarEmOrdem();
+		l->primeirosElementos(n);
 	}
 	
 	
