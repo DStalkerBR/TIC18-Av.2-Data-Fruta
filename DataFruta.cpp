@@ -145,51 +145,42 @@ class ListaDatas :public Lista {
 	}
 };
 
-class ListaSalarios :public Lista {
-	vector<float> lista;
-	
-	public:
-	
-	/*
-	O método abaixo pergunta ao usuarios quantos
-	elementos vão existir na lista e depois
-	solicita a digitação de cada um deles
-	*/
-	void entradaDeDados() {
-		int quant;float salario;
-		cout<<"Quantos elementos tera na lista?"<<endl;cin>>quant;
-		for(int i=0;i<quant;i++){
-			cout<<"Digite o salario: "<<endl;cin>>salario;
-			lista.push_back(salario);
-		}
-	}
-			
-	void mostraMediana() {
-		cout << "Aqui vai mostrar a mediana da lista de salarios" << endl;
-		if(lista.size()%2 == 0){
-			cout<<"Mediana: "<<lista[lista.size()/2]<<endl;
-		}
-		else{
-			cout<<"Mediana: "<<lista[(lista.size()/2)+1]<<endl;
-		}
-	}
-	
-	void mostraMenor() {
-		cout << "Aqui vai mostrar o menor dos salarios" << endl;
-		for(auto l:lista){
-			if(l < lista[0]){
-				cout<<"Menor: "<<l<<endl;
-			}
-		}
-	}
-	void mostraMaior() {
-		cout << "aqui vai mostrar o maior dos salarios" << endl;
-		for(auto l:lista){
-			if(l > lista[0]){
-				cout<<"Maior: "<<l<<endl;
-			}
-		}
-	}
+class ListaSalarios : public Lista {
+    vector<float> lista;
+
+public:
+    void entradaDeDados() override {
+        int quant;
+        float salario;
+        cout << "Quantos elementos terá na lista de salários? : ";
+        cin >> quant;
+        for (int i = 0; i < quant; i++) {
+            cout << "Digite o salário: ";
+            cin >> salario;
+            lista.push_back(salario);
+        }
+        sort(lista.begin(), lista.end());
+    }
+
+    void mostraMediana() override {
+        int n = lista.size();
+        if (n % 2 == 0) {
+            // Se o número de elementos for par, calcular a mediana como a média dos dois valores do meio.
+            float mediana = (lista[n / 2 - 1] + lista[n / 2]) / 2.0;
+            cout << "Mediana da lista de salários: " << mediana << endl;
+        } else {
+            // Se o número de elementos for ímpar, a mediana é o valor do meio.
+            cout << "Mediana da lista de salários: " << lista[n / 2] << endl;
+        }
+    }
+
+    void mostraMenor() override {
+        cout << "Menor salário: " << lista[0] << endl;
+    }
+
+    void mostraMaior() override {
+        cout << "Maior salário: " << lista[lista.size() - 1] << endl;
+    }
 };
 
 
