@@ -225,6 +225,20 @@ public:
     void mostraMaior() override {
         cout << "Maior idade: " << lista[lista.size() - 1] << endl;
     }
+//Implementação do método listaEmOrdem
+    void listaEmOrdem() override {
+        for(auto it=lista.begin() ; it!=lista.end() ; it++){
+            cout << *it << endl;
+        }
+    }
+//Implementação do método primeirosElementos
+    void primeirosElementos(int n) override {
+        int i = 0;
+        for(auto it=lista.begin() ; i<n && it!=lista.end() ; it++){
+            cout << *it << endl;
+            i++;
+        }
+    }  
 };
  
 int main () {
