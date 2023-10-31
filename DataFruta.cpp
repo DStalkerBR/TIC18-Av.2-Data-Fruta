@@ -370,7 +370,7 @@ public:
         cout << "Maior idade: " << lista[lista.size() - 1] << endl;
     }
 //Implementação do método listaEmOrdem
-    void listaEmOrdem() override {
+    void listarEmOrdem() override {
         for(auto it=lista.begin() ; it!=lista.end() ; it++){
             cout << *it << endl;
         }
