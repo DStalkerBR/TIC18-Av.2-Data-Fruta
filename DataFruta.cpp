@@ -96,6 +96,36 @@ class ListaNomes : public Lista{
 
 class ListaDatas :public Lista {
 	vector<Data> lista_datas;
+
+	/**
+	 * Ordena a lista de datas utilizando o algoritmo de ordenação por inserção.
+	 *
+	 * Este método cria uma cópia da lista de datas original e a ordena em ordem crescente
+	 * com base em critérios definidos na classe Data. As datas ordenadas são retornadas em
+	 * um novo vetor, enquanto a lista original permanece inalterada.
+	 *
+	 * @return Um vetor de datas ordenadas em ordem crescente.
+	 */
+	vector<Data> ordenar(){
+		vector<Data> datasOrdenadas = this->lista_datas;
+		for (size_t i = 1; i < datasOrdenadas.size(); i++) {
+			// Iniciando um loop para percorrer as datas não ordenadas.
+			
+			Data dataChave = datasOrdenadas[i]; // Copiando a data atual que será inserida na lista ordenada.
+			int j = i - 1;
+
+			// Loop para comparar 'dataAtual' com as datas anteriores na lista ordenada.
+			// E mover datas maiores que a data Chave a direita
+			while (j >= 0 && (Data::compara(datasOrdenadas[j], dataChave) == 1)) {
+				datasOrdenadas[j + 1] = datasOrdenadas[j];
+				j--;
+			}
+			
+			// Movendo a data Chave pra posição a anterior as datas que foram movidas a direita
+			datasOrdenadas[j + 1] = dataChave;
+		}
+		return datasOrdenadas;
+	}
 	
 	public:
 	/*
@@ -199,6 +229,38 @@ class ListaDatas :public Lista {
 		else {
 			cout << "A lista de datas esta vazia." << std::endl;
 		}
+	}
+
+	void listarEmOrdem() override {
+		if (!this->lista_datas.empty()) {
+			cout << "______________________________________________"<< endl;
+            cout << "Lista de Datas em ordem crescente" << endl;
+			cout << "______________________________________________"<< endl;
+            for(auto data_atual:this->ordenar()){
+                cout << data_atual.toString() << endl;
+            }
+        }
+        else {
+            cout << "A lista de datas está vazia." << endl;
+        }
+	}
+
+	void primeirosElementos(int n) override{
+		if (!this->lista_datas.empty()) {
+			if (n > 0 && n <= this->lista_datas.size()) {
+				auto datasOrdenadas = this->ordenar();
+				cout << "______________________________________________"<< endl;
+				cout << n << " primeiros elementos da lista de datas: " << endl;
+				cout << "______________________________________________"<< endl;
+				for(size_t i = 0; i < n; i++){
+					cout << datasOrdenadas.at(i).toString() << endl;
+				}
+			} else {
+				cout << "Numero menor ou igual a 0 ou maior que o tamanho da lista. " << endl;
+			}
+        }else {
+            cout << "A lista de datas está vazia." << endl;
+        }
 	}
 };
 
