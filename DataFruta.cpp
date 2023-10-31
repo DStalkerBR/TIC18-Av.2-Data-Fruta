@@ -317,7 +317,7 @@ public:
     void listarEmOrdem() override {
         cout<<" Listando salários em ordem"<<endl;
         for(auto l:lista){
-            cout <<1<< endl;
+            cout <<l<< endl;
         }
     }
 //Implementação do método primeirosElementos
