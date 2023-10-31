@@ -112,7 +112,10 @@ class ListaNomes : public Lista{
 	}
 
 	void primeirosElementos(int n){
-		if(lista.size() < n && lista.size() > 0 && n > 0){	
+		if (lista.size() < n){
+			n = lista.size();
+		}
+		if(lista.size() > 0 && n > 0){	
 			cout<<"Listando os "<<n<<" primeiros elementos: "<<endl;
 			for(int i=0;i<n;i++){
 				cout<<lista[i]<<endl;
@@ -315,23 +318,26 @@ public:
     }
 	//Implementação do método listaEmOrdem
     void listarEmOrdem() override {
-        cout<<" Listando salários em ordem"<<endl;
+        cout<<"Listando salários em ordem"<<endl;
         for(auto l:lista){
             cout <<l<< endl;
         }
     }
 //Implementação do método primeirosElementos
     void primeirosElementos(int n) {
-     if(lista.size() < n && lista.size() > 0 && n > 0){
+	if (lista.size() < n){
+		n = lista.size();
+	}
+     if(lista.size() > 0 && n > 0){
         int i = 0;
-	cout<<" Listando os "<<n<<"primeiros elemenstos"<<endl;
+	cout<<"Listando os "<<n<<"primeiros elemenstos"<<endl;
         for(int i=0; i<n; i++){
         cout<<lista[i]<<endl;
         }	
     }   
-else {
-cout <<"Lista vazia"<< endl; 
-}
+    else {
+    cout <<"Lista vazia"<< endl; 
+    }
 }  
 
 };
